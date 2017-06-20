@@ -5,6 +5,8 @@
 #include <mysql/mysql.h>
 #include "cgic.h"
 
+char * headname = "head.html";
+char * footname = "footer.html";
 
 int cgiMain()
 {
@@ -19,9 +21,22 @@ int cgiMain()
 	fprintf(cgiOut, "<head><meta charset=\"utf-8\"><title>查询结果</title>\
 		    <link rel=\"stylesheet\" href=\"/stu/public/css/bootstrap.min.css\">\
 		</head>");
-
+		FILE * fd;
 	char name[32] = "\0";
 	int status = 0;
+	char ch;
+
+	if(!(fd = fopen(headname, "r"))){
+		fprintf(cgiOut, "Cannot open file, %s\n", headname);
+		return -1;
+	}
+	ch = fgetc(fd);
+
+	while(ch != EOF){
+		fprintf(cgiOut, "%c", ch);
+		ch = fgetc(fd);
+	}
+	fclose(fd);
 
 	status = cgiFormString("name",  name, 32);
 	if (status != cgiFormSuccess)
@@ -36,11 +51,11 @@ int cgiMain()
 
 	if (name[0] == '*')
 	{
-		sprintf(sql, "select * from stu");
+		sprintf(sql, "select * from Information");
 	}
 	else
 	{
-		sprintf(sql, "select * from stu where name = '%s'", name);
+		sprintf(sql, "select * from Information where SNAME = '%s'", name);
 	}
 
 

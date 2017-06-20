@@ -4,19 +4,39 @@
 #include <mysql/mysql.h>
 #include "cgic.h"
 
+char * headname = "head.html";
+char * footname = "footer.html";
+
 int cgiMain()
 {
 
 	fprintf(cgiOut, "Content-type:text/html;charset=utf-8\n\n");
 
+	FILE * fd;
+
 	char name[32] = "\0";
 	char age[16] = "\0";
+	char SEX[16]= "\0";
 	char stuId[32] = "\0";
-	char SCNO[2]="\0";
+	char SCNO[16]="\0";
+	char FPLACE[16]="\0";
+	char ch;
 
 	int status = 0;
 
-	status = cgiFormString("name",  name, 32);
+	if(!(fd = fopen(headname, "r"))){
+		fprintf(cgiOut, "Cannot open file, %s\n", headname);
+		return -1;
+	}
+	ch = fgetc(fd);
+
+	while(ch != EOF){
+		fprintf(cgiOut, "%c", ch);
+		ch = fgetc(fd);
+	}
+	fclose(fd);
+
+	status = cgiFormString("name",name, 32);
 	if (status != cgiFormSuccess)
 	{
 		fprintf(cgiOut, "get name error!\n");
@@ -36,15 +56,27 @@ int cgiMain()
 		fprintf(cgiOut, "get stuId error!\n");
 		return 1;
 	}
-	status = cgiFormString("SCNO",  SCNO, 2);
+	status = cgiFormString("SCNO",  SCNO, 16);
 	if (status != cgiFormSuccess)
 	{
 		fprintf(cgiOut, "get SCNO error!\n");
 		return 1;
 	}
-	//fprintf(cgiOut, "name = %s, age = %s, stuId = %s\n", name, age, stuId);
+	status = cgiFormString("FPLACE",FPLACE,16);
+	if(status != cgiFormSuccess)
+	{
+		fprintf(cgiOut, "get FPLACE error\n" );
+		return 1;
+	}
+	status = cgiFormString("SEX", SEX ,16);
+	if(status != cgiFormSuccess)
+	{
+		fprintf(cgiOut, "get SEX error\n" );
+		return 1;
+	}
+	fprintf(cgiOut, "name = %s, age = %s, stuId = %s\n", name, age, stuId);
 
-	int ret;
+	//int ret;
 	char sql[128] = "\0";
 	MYSQL *db;
 
@@ -74,13 +106,15 @@ int cgiMain()
 		{
 			fprintf(cgiOut,"mysql_real_query fail:%s\n", mysql_error(db));
 			mysql_close(db);
-			return -1;
+
+
+
 		}
 	}*/
 
 
 
-	sprintf(sql, "insert into information values(%d, '%s', %d,'%s')", atoi(stuId),atoi(name), atoi(age),atoi(SCNO));
+	sprintf(sql, "insert into Information values(%d, '%s','%s','%s', %d,'%s')", atoi(stuId),name,FPLACE,SEX,atoi(age),SCNO);
 	if (mysql_real_query(db, sql, strlen(sql) + 1) != 0)
 	{
 		fprintf(cgiOut, "%s\n", mysql_error(db));
