@@ -71,7 +71,7 @@ int cgiMain()
 	}
 
 
-	fprintf(cgiOut, "delete stu ok!\n");
+	fprintf(cgiOut, "删除学生信息成功！！！\n");
 	mysql_close(db);
 
 	return 0;

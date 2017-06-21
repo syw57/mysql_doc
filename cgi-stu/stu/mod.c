@@ -4,17 +4,36 @@
 #include <mysql/mysql.h>
 #include "cgic.h"
 
+char * headname = "head.html";
+char * footname = "footer.html";
+
 int cgiMain()
 {
 
 	fprintf(cgiOut, "Content-type:text/html;charset=utf-8\n\n");
+
+	FILE * fd;
 
 	char name[32] = "\0";
 	char age[16] = "\0";
 	char stuId[32] = "\0";
 	char FPLACE[16] = "\0";
 	char SEX[16] ="\0";
+	char ch;
+
 	int status = 0;
+
+	if(!(fd = fopen(headname, "r"))){
+		fprintf(cgiOut, "Cannot open file, %s\n", headname);
+		return -1;
+	}
+	ch = fgetc(fd);
+
+	while(ch != EOF){
+		fprintf(cgiOut, "%c", ch);
+		ch = fgetc(fd);
+	}
+	fclose(fd);
 
 	status = cgiFormString("name",  name, 32);
 	if (status != cgiFormSuccess)
@@ -83,7 +102,7 @@ int cgiMain()
 
 
 
-	fprintf(cgiOut, "update student ok!\n");
+	fprintf(cgiOut, "学生信息修改成功！！！\n");
 	mysql_close(db);
 	return 0;
 }
