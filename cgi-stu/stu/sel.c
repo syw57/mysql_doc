@@ -51,11 +51,11 @@ int cgiMain()
 
 	if (name[0] == '*')
 	{
-		sprintf(sql, "select * from Information");
+		sprintf(sql, "select SNO,SNAME,FPLACE,SEX,AGE,SCNO from Information where STATUS=1");
 	}
 	else
 	{
-		sprintf(sql, "select * from Information where SNAME = '%s'", name);
+		sprintf(sql, "select SNO,SNAME,FPLACE,SEX,AGE,SCNO from Information where SNAME = '%s' and STATUS=1", name);
 	}
 
 

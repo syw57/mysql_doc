@@ -12,12 +12,26 @@ int cgiMain()
 	char name[32] = "\0";
 	char age[16] = "\0";
 	char stuId[32] = "\0";
+	char FPLACE[16] = "\0";
+	char SEX[16] ="\0";
 	int status = 0;
 
 	status = cgiFormString("name",  name, 32);
 	if (status != cgiFormSuccess)
 	{
 		fprintf(cgiOut, "get name error!\n");
+		return 1;
+	}
+	status = cgiFormString("FPLACE",  FPLACE, 32);
+	if (status != cgiFormSuccess)
+	{
+		fprintf(cgiOut, "get FPLACE error!\n");
+		return 1;
+	}
+	status = cgiFormString("SEX",  SEX, 32);
+	if (status != cgiFormSuccess)
+	{
+		fprintf(cgiOut, "get SEX error!\n");
 		return 1;
 	}
 
@@ -59,7 +73,7 @@ int cgiMain()
 	}
 
 
-	sprintf(sql, "update stu set name='%s', age= %d where id = %d ", name, atoi(age), atoi(stuId));
+	sprintf(sql, "update Information set SNAME='%s', AGE= %d, FPLACE='%s', SEX='%s', AGE=%d where SNO = %d ", name, atoi(age), FPLACE, SEX, atoi(age),  atoi(stuId));
 	if ((ret = mysql_real_query(db, sql, strlen(sql) + 1)) != 0)
 	{
 		fprintf(cgiOut,"mysql_real_query fail:%s\n", mysql_error(db));

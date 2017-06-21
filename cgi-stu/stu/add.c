@@ -74,7 +74,7 @@ int cgiMain()
 		fprintf(cgiOut, "get SEX error\n" );
 		return 1;
 	}
-	fprintf(cgiOut, "name = %s, age = %s, stuId = %s\n", name, age, stuId);
+	//fprintf(cgiOut, "name = %s, age = %s, stuId = %s\n", name, age, stuId);
 
 	//int ret;
 	char sql[128] = "\0";
@@ -114,7 +114,7 @@ int cgiMain()
 
 
 
-	sprintf(sql, "insert into Information values(%d, '%s','%s','%s', %d,'%s')", atoi(stuId),name,FPLACE,SEX,atoi(age),SCNO);
+	sprintf(sql, "insert into Information values(%d, '%s','%s','%s', %d,'%s',1)", atoi(stuId),name,FPLACE,SEX,atoi(age),SCNO);
 	if (mysql_real_query(db, sql, strlen(sql) + 1) != 0)
 	{
 		fprintf(cgiOut, "%s\n", mysql_error(db));
