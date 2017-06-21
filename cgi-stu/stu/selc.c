@@ -12,12 +12,17 @@ int cgiMain()
 {
 
 	fprintf(cgiOut, "Content-type:text/html;charset=utf-8\n\n");
+/*	fprintf(cgiOut, "<head><meta charset=\"utf-8\"/><title>查询结果</title>\
+			<style>table {width:400px; margin: 50px auto; border: 1px solid gray; border-collapse: collapse; border-spacing: none; text-align:center;}\
+			tr,td,th{border: 1px solid gray;}\
+			</style>\
+			</head>");*/
 
 	fprintf(cgiOut, "<head><meta charset=\"utf-8\"><title>查询结果</title>\
 		    <link rel=\"stylesheet\" href=\"/stu/public/css/bootstrap.min.css\">\
 		</head>");
 		FILE * fd;
-	char name[32] = "\0";
+	char Sno[32] = "\0";
 	int status = 0;
 	char ch;
 
@@ -33,10 +38,10 @@ int cgiMain()
 	}
 	fclose(fd);
 
-	status = cgiFormString("name",  name, 32);
+	status = cgiFormString("Sno",  Sno, 32);
 	if (status != cgiFormSuccess)
 	{
-		fprintf(cgiOut, "get name error!\n");
+		fprintf(cgiOut, "get Sno error!\n");
 		return 1;
 	}
 
@@ -44,13 +49,13 @@ int cgiMain()
 	MYSQL *db;
 	char sql[128] = "\0";
 
-	if (name[0] == '*')
+	if (Sno[0] == '*')
 	{
-		sprintf(sql, "select SNO,SNAME,FPLACE,SEX,AGE,SCNAME from Information,School where Information.SCNO=School.SCNO AND STATUS=1");
+		sprintf(sql, "SELECT Information.SNO as '学号', Information.SNAME as '姓名',CNO as '课程编号',SCORE as '成绩' from Score,Information where Score.SNO=Information.SNO and STATUS=1");
 	}
 	else
 	{
-		sprintf(sql, "select SNO,SNAME,FPLACE,SEX,AGE,SCN from Information where SNAME = '%s' and STATUS=1", name);
+		sprintf(sql, "SELECT Information.SNO as '学号', Information.SNAME as '姓名',CNO as '课程编号',SCORE as '成绩' from Score,Information where Score.SNO=Information.SNO and STATUS=1 and Information.SNO=%d;", atoi(Sno));
 	}
 
 
