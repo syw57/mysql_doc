@@ -46,11 +46,11 @@ int cgiMain()
 
 	if (name[0] == '*')
 	{
-		sprintf(sql, "select SNO,SNAME,FPLACE,SEX,AGE,SCNAME from Information,School where Information.SCNO=School.SCNO AND STATUS=1");
+		sprintf(sql, "select SNO as '学号',SNAME as '学生姓名',FPLACE as '居住地',SEX as '性别',AGE as '年龄',SCNAME as '院系名称' from Information,School where Information.SCNO=School.SCNO AND Information.STATUS=1");
 	}
 	else
 	{
-		sprintf(sql, "select SNO,SNAME,FPLACE,SEX,AGE,SCN from Information where SNAME = '%s' and STATUS=1", name);
+		sprintf(sql, "select SNO as '学号',SNAME as '学生姓名',FPLACE as '居住地',SEX as '性别',AGE as '年龄',SCNAME as '院系名称' from Information,School where Information.SCNO=School.SCNO AND Information.STATUS=1 and SNAME = '%s'", name);
 	}
 
 
