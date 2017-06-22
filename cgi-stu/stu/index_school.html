@@ -38,47 +38,41 @@
 </head>
 
 <body>
-    <h1 class="header text-center">学生信息管理系统-教师管理</h1>
+    <h1 class="header text-center">学生信息管理系统-院系管理</h1>
     <div class="container">
         <div class="operation row">
             <div class="text-center col-md-3 col-sm-6">
-                <button>添加教师信息</button>
+                <button>添加院系信息</button>
             </div>
             <div class="text-center col-md-3 col-sm-6">
-                <button>查询教师信息</button>
+                <button>查询院系信息</button>
             </div>
             <div class="text-center col-md-3 col-sm-6">
-                <button>删除教师信息</button>
+                <button>删除院系信息</button>
             </div>
             <div class="text-center col-md-3 col-sm-6">
-                <button>修改教师信息</button>
+                <button>修改院系信息</button>
             </div>
         </div>
         <ul class="forms" >
             <li class="show">
-                <form class="form-horizontal" method="get" action="/cgi-bin/sx/addtea.cgi">
+                <form class="form-horizontal" method="get" action="/cgi-bin/sx/addschool.cgi">
                   <div class="form-group">
-                      <label for="tno" class="col-sm-2 control-label">教师编号</label>
+                      <label for="scno" class="col-sm-2 control-label">院系编号</label>
                       <div class="col-sm-10">
-                          <input type="text" name="tno" class="form-control" id="tno" placeholder="请输入教师编号">
+                          <input type="text" name="scno" class="form-control" id="scno" placeholder="请输入院系编号">
                       </div>
                   </div>
                     <div class="form-group">
-                        <label for="tname" class="col-sm-2 control-label">教师名字</label>
+                        <label for="scname" class="col-sm-2 control-label">院系名称</label>
                         <div class="col-sm-10">
-                            <input type="text" name="tname" class="form-control" id="tname" placeholder="请输入教师名字">
+                            <input type="text" name="scname" class="form-control" id="scname" placeholder="请输入院系名称">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="title" class="col-sm-2 control-label">教师职称</label>
+                        <label for="dean" class="col-sm-2 control-label">主任</label>
                         <div class="col-sm-10">
-                            <input type="text" name="title" class="form-control" id="title" placeholder="请输入教师职称">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="scno" class="col-sm-2 control-label">所属院系</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="scno" class="form-control" id="scno" placeholder="请输入教师所属院系">
+                            <input type="text" name="dean" class="form-control" id="dean" placeholder="请输入主任名字">
                         </div>
                     </div>
                     <div class="text-center">
@@ -88,11 +82,11 @@
                 </form>
             </li>
             <li>
-                <form class="form-horizontal" method="get" action="/cgi-bin/sx/seltea.cgi">
+                <form class="form-horizontal" method="get" action="/cgi-bin/sx/selschool.cgi">
                     <div class="form-group">
-                      <label for="tname-sel" class="col-sm-2 control-label">输入教师姓名查询</label>
+                      <label for="scname-sel" class="col-sm-2 control-label">输入院系名称查询</label>
                       <div class="col-sm-10">
-                          <input type="text" name="tname" class="form-control" id="tname-sel" placeholder="输入*查询所有">
+                          <input type="text" name="scname" class="form-control" id="scname-sel" placeholder="输入*查询所有">
                       </div>
                     </div>
                     <div class="text-center">
@@ -102,11 +96,11 @@
                 </form>
             </li>
             <li>
-                <form class="form-horizontal" method="get" action="/cgi-bin/sx/deltea.cgi">
+                <form class="form-horizontal" method="get" action="/cgi-bin/sx/delschool.cgi">
                     <div class="form-group">
-                        <label for="tno-del" class="col-sm-2 control-label">输入教师Id</label>
+                        <label for="scno-del" class="col-sm-2 control-label">输入院系Id</label>
                         <div class="col-sm-10">
-                            <input type="text" name="tno" class="form-control" id="tno-del" placeholder="输入要删除的教师Id">
+                            <input type="text" name="scno" class="form-control" id="scno-del" placeholder="输入要删除的院系Id">
                         </div>
                     </div>
                     <div class="text-center">
@@ -116,36 +110,30 @@
                 </form>
             </li>
             <li>
-                <form class="form-horizontal" method="get" action="/cgi-bin/sx/modtea.cgi">
+                <form class="form-horizontal" method="get" action="/cgi-bin/sx/modschool.cgi">
                   <div class="form-group">
-                      <label for="tno" class="col-sm-2 control-label">教师编号</label>
+                      <label for="scno" class="col-sm-2 control-label">院系编号</label>
                       <div class="col-sm-10">
-                          <input type="text" name="tno" class="form-control" id="tno" placeholder="请输入教师编号">
+                          <input type="text" name="scno" class="form-control" id="scno" placeholder="请输入院系编号">
                       </div>
                   </div>
                     <div class="form-group">
-                        <label for="tname" class="col-sm-2 control-label">教师名字</label>
+                        <label for="scname" class="col-sm-2 control-label">院系名称</label>
                         <div class="col-sm-10">
-                            <input type="text" name="tname" class="form-control" id="tname" placeholder="请输入教师名字">
+                            <input type="text" name="scname" class="form-control" id="scname" placeholder="请输入院系名称">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="title" class="col-sm-2 control-label">教师职称</label>
+                        <label for="dean" class="col-sm-2 control-label">主任</label>
                         <div class="col-sm-10">
-                            <input type="text" name="title" class="form-control" id="title" placeholder="请输入教师职称">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="scno" class="col-sm-2 control-label">院系编号</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="scno" class="form-control" id="scno" placeholder="请输入教师所属院系">
+                            <input type="text" name="dean" class="form-control" id="dean" placeholder="请输入主任名字">
                         </div>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-success">提交</button>
                         <button type="reset" class="btn btn-success">重置</button>
                     </div>
-               </form>
+                </form>
             </li>
         </ul>
     </div>

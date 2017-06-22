@@ -14,7 +14,7 @@ int cgiMain()
 
   FILE * fd;
 
-	char cId[32] = "\0";
+	char scno[32] = "\0";
 	int status = 0;
 
 	char ch;
@@ -32,10 +32,10 @@ int cgiMain()
 	fclose(fd);
 
 
-	status = cgiFormString("cId",  cId, 32);
+	status = cgiFormString("scno",  scno, 32);
 	if (status != cgiFormSuccess)
 	{
-		fprintf(cgiOut, "get cId error!\n");
+		fprintf(cgiOut, "get scno error!\n");
 		return 1;
 	}
 
@@ -62,7 +62,7 @@ int cgiMain()
 	}
 
 
-	sprintf(sql, "update Course set STATUS=0 where CNO=%d", atoi(cId));
+	sprintf(sql, "update School set STATUS=0 where SCNO='%s'",scno);
 	if ((ret = mysql_real_query(db, sql, strlen(sql) + 1)) != 0)
 	{
 		fprintf(cgiOut,"mysql_real_query fail:%s\n", mysql_error(db));
@@ -71,7 +71,7 @@ int cgiMain()
 	}
 
 
-	fprintf(cgiOut, "删除课程信息成功！！！\n");
+	fprintf(cgiOut, "删除院系信息成功！！！\n");
 	mysql_close(db);
 
 	return 0;

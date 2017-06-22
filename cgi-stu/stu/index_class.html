@@ -47,6 +47,12 @@
             <div class="text-center col-md-3 col-sm-6">
                 <button>查询课程信息</button>
             </div>
+            <div class="text-center col-md-3 col-sm-6">
+                <button>删除课程信息</button>
+            </div>
+            <div class="text-center col-md-3 col-sm-6">
+                <button>修改课程信息</button>
+            </div>
         </div>
         <ul class="forms" >
             <li class="show">
@@ -82,6 +88,40 @@
                         <button type="reset" class="btn btn-success">重置</button>
                     </div>
                 </form>
+            </li>
+            <li>
+                <form class="form-horizontal" method="get" action="/cgi-bin/sx/dlecla.cgi">
+                    <div class="form-group">
+                        <label for="cId-del" class="col-sm-2 control-label">输入要删除的课程Id</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="cId" class="form-control" id="cId-del" placeholder="输入课程Id">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">提交</button>
+                        <button type="reset" class="btn btn-success">重置</button>
+                    </div>
+                </form>
+            </li>
+            <li>
+                <form class="form-horizontal" method="get" action="/cgi-bin/sx/modcla.cgi">
+                  <div class="form-group">
+                      <label for="cno" class="col-sm-2 control-label">课程号</label>
+                      <div class="col-sm-10">
+                          <input type="text" name="cno" class="form-control" id="cno" placeholder="请输入课程编号">
+                      </div>
+                  </div>
+                    <div class="form-group">
+                        <label for="cname" class="col-sm-2 control-label">课程名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="cname" class="form-control" id="cname" placeholder="请输入课程名称">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">提交</button>
+                        <button type="reset" class="btn btn-success">重置</button>
+                    </div>
+               </form>
             </li>
         </ul>
     </div>

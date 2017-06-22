@@ -51,11 +51,11 @@ int cgiMain()
 
 	if (Sno[0] == '*')
 	{
-		sprintf(sql, "SELECT Information.SNO as '学号', Information.SNAME as '姓名',CNO as '课程编号',SCORE as '成绩' from Score,Information where Score.SNO=Information.SNO and STATUS=1");
+		sprintf(sql, "SELECT Information.SNO as '学号', Information.SNAME as '姓名',CNO as '课程编号',TNO as '教师编号',SCORE as '成绩' from Score,Information where Score.SNO=Information.SNO and Score.STATUS=1");
 	}
 	else
 	{
-		sprintf(sql, "SELECT Information.SNO as '学号', Information.SNAME as '姓名',CNO as '课程编号',SCORE as '成绩' from Score,Information where Score.SNO=Information.SNO and STATUS=1 and Information.SNO=%d;", atoi(Sno));
+		sprintf(sql, "SELECT Information.SNO as '学号', Information.SNAME as '姓名',CNO as '课程编号',TNO as '教师编号',SCORE as '成绩' from Score,Information where Score.SNO=Information.SNO and Score.STATUS=1 and Information.SNO=%d;", atoi(Sno));
 	}
 
 

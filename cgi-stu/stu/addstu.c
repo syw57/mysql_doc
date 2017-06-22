@@ -89,7 +89,7 @@ int cgiMain()
 		return -1;
 	}
 
-	fprintf(cgiOut, "添加课程信息成功！！！\n");
+	fprintf(cgiOut, "添加学生成绩成功！！！\n");
 	mysql_close(db);
 	return 0;
 }

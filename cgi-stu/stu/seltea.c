@@ -22,7 +22,7 @@ int cgiMain()
 		    <link rel=\"stylesheet\" href=\"/stu/public/css/bootstrap.min.css\">\
 		</head>");
 		FILE * fd;
-	char cname[32] = "\0";
+	char tname[32] = "\0";
 	int status = 0;
 	char ch;
 
@@ -38,10 +38,10 @@ int cgiMain()
 	}
 	fclose(fd);
 
-	status = cgiFormString("cname",  cname, 32);
+	status = cgiFormString("tname",  tname, 32);
 	if (status != cgiFormSuccess)
 	{
-		fprintf(cgiOut, "get cname error!\n");
+		fprintf(cgiOut, "get tname error!\n");
 		return 1;
 	}
 
@@ -49,13 +49,13 @@ int cgiMain()
 	MYSQL *db;
 	char sql[128] = "\0";
 
-	if (cname[0] == '*')
+	if (tname[0] == '*')
 	{
-		sprintf(sql, "select CNO as '课程编号',CNAME as '课程名称' from Course where STATUS=1");
+		sprintf(sql, "select TNO as '教师编号',TNAME as '教师姓名',TITLE as '职称',SCNO as '院系编号' from Teacher where STATUS=1");
 	}
 	else
 	{
-		sprintf(sql, "select CNO as '课程编号',CNAME as '课程名称' from Course where CNAME='%s' and STATUS=1",cname);
+		sprintf(sql, "select TNO as '教师编号',TNAME as '教师姓名',TITLE as '职称',SCNO as '院系编号' from Teacher where STATUS=1 and TNAME='%s'",tname);
 	}
 
 

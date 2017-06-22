@@ -67,7 +67,7 @@ int cgiMain()
 		return -1;
 	}
 
-	sprintf(sql, "insert into Course values(%d, '%s')",atoi(cno),cname);
+	sprintf(sql, "insert into Course values(%d, '%s',1)",atoi(cno),cname);
 	if (mysql_real_query(db, sql, strlen(sql) + 1) != 0)
 	{
 		fprintf(cgiOut, "%s\n", mysql_error(db));

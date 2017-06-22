@@ -14,7 +14,7 @@ int cgiMain()
 
   FILE * fd;
 
-	char cId[32] = "\0";
+	char tno[32] = "\0";
 	int status = 0;
 
 	char ch;
@@ -32,13 +32,12 @@ int cgiMain()
 	fclose(fd);
 
 
-	status = cgiFormString("cId",  cId, 32);
-	if (status != cgiFormSuccess)
-	{
-		fprintf(cgiOut, "get cId error!\n");
-		return 1;
-	}
-
+  status = cgiFormString("tno",tno, 32);
+  if (status != cgiFormSuccess)
+  {
+    fprintf(cgiOut, "get tno error!\n");
+    return 1;
+  }
 
 	int ret;
 	char sql[128] = "\0";
@@ -62,7 +61,7 @@ int cgiMain()
 	}
 
 
-	sprintf(sql, "update Course set STATUS=0 where CNO=%d", atoi(cId));
+	sprintf(sql, "update Teacher set STATUS=0 where TNO='%s'",tno);
 	if ((ret = mysql_real_query(db, sql, strlen(sql) + 1)) != 0)
 	{
 		fprintf(cgiOut,"mysql_real_query fail:%s\n", mysql_error(db));

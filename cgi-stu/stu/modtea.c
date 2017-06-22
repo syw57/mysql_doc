@@ -12,12 +12,15 @@ int cgiMain()
 
 	fprintf(cgiOut, "Content-type:text/html;charset=utf-8\n\n");
 
-  FILE * fd;
+	FILE * fd;
 
-	char cId[32] = "\0";
-	int status = 0;
-
+	char tno[32] = "\0";
+	char tname[16]="\0";
+  char title[16]="\0";
+  char scno[16]="\0";
 	char ch;
+
+	int status = 0;
 
 	if(!(fd = fopen(headname, "r"))){
 		fprintf(cgiOut, "Cannot open file, %s\n", headname);
@@ -31,16 +34,33 @@ int cgiMain()
 	}
 	fclose(fd);
 
-
-	status = cgiFormString("cId",  cId, 32);
+	status = cgiFormString("tno",tno, 32);
 	if (status != cgiFormSuccess)
 	{
-		fprintf(cgiOut, "get cId error!\n");
+		fprintf(cgiOut, "get tno error!\n");
 		return 1;
 	}
 
+	status = cgiFormString("tname",tname, 16);
+	if (status != cgiFormSuccess)
+	{
+		fprintf(cgiOut, "get tname error!\n");
+		return 1;
+	}
+  status = cgiFormString("title",title, 16);
+	if (status != cgiFormSuccess)
+	{
+		fprintf(cgiOut, "get title error!\n");
+		return 1;
+	}
+  status = cgiFormString("scno",scno, 16);
+	if (status != cgiFormSuccess)
+	{
+		fprintf(cgiOut, "get scno error!\n");
+		return 1;
+	}
 
-	int ret;
+	//int ret;
 	char sql[128] = "\0";
 	MYSQL *db;
 
@@ -61,18 +81,15 @@ int cgiMain()
 		return -1;
 	}
 
-
-	sprintf(sql, "update Course set STATUS=0 where CNO=%d", atoi(cId));
-	if ((ret = mysql_real_query(db, sql, strlen(sql) + 1)) != 0)
+	sprintf(sql, "update Teacher set TNAME='%s',TITLE='%s',SCNO='%s' where TNO='%s'",tname,title,scno,tno);
+	if (mysql_real_query(db, sql, strlen(sql) + 1) != 0)
 	{
-		fprintf(cgiOut,"mysql_real_query fail:%s\n", mysql_error(db));
+		fprintf(cgiOut, "%s\n", mysql_error(db));
 		mysql_close(db);
 		return -1;
 	}
 
-
-	fprintf(cgiOut, "删除课程信息成功！！！\n");
+	fprintf(cgiOut, "修改教师信息成功！！！\n");
 	mysql_close(db);
-
 	return 0;
 }
